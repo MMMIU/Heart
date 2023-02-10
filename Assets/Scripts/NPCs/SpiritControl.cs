@@ -9,12 +9,14 @@ public class SpiritControl : MonoBehaviour
     public float x_offset;
     public float y_offset;
 
-    
+
     public GameObject player;
     public BoxCollider2D boxCollider;
     public SpriteRenderer spriteRenderer;
     public Sprite spiritSprite;
     public Animator animator;
+
+    public Collider2D killZone;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +31,8 @@ public class SpiritControl : MonoBehaviour
     // On trigger enter
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        // If player collides with killZone
+        if (collision.gameObject.CompareTag("KillZone") && collision.gameObject.CompareTag("Player"))
         {
             // Change sprite to spirit sprite
             changeSprite();
@@ -43,7 +46,8 @@ public class SpiritControl : MonoBehaviour
     }
 
     // Change sprite method
-    void changeSprite() {
+    void changeSprite()
+    {
         spriteRenderer.sprite = spiritSprite;
     }
 
@@ -51,7 +55,7 @@ public class SpiritControl : MonoBehaviour
     {
         // Move spirit to player and make it hover over the player
         this.transform.position = player.transform.position;
-        this.transform.position = new Vector3(this.transform.position.x +x_offset, this.transform.position.y + y_offset, this.transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x + x_offset, this.transform.position.y + y_offset, this.transform.position.z);
     }
 
 }

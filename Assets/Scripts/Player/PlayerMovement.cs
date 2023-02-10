@@ -7,97 +7,160 @@ public class PlayerMovement : MonoBehaviour
     // Control enabled
     public bool controlEnabled { get; set; } = true;
 
-    // Initializing required variables
-    public float moveDirection;
-    public float moveSpeed = 7.0f;
-    public float jumpForce = 15.0f;
-    public float jumpFloat = 1.0f;
-    public float checkRadius = 0.5f;
-    // True meaning right, false meaning left
-    public bool faceDirection = true;
-    
+    [Space]
+    [SerializeField]
+    private float moveSpeed = 1.0f;
 
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
-    
-    private Rigidbody2D rigidBody2D;
-    private Animator animator;
+    [Space]
+    [SerializeField]
+    private float collisionOffset = 0.1f;
+    [SerializeField]
+    private bool isGrounded = false;
+    [SerializeField]
+    private Transform GroundCheck;
+    [SerializeField]
+    private LayerMask groundLayer;
+
+    [Space]
+    [SerializeField]
+    private float jumpForce = 1.0f;
+    [SerializeField]
+    private bool isJumping = false;
+    private bool jumpPressed;
+    [SerializeField]
+    private int maxJumpCount = 2;
+    private int jumpCount = 0;
+
+    [Space]
+    private bool isAttacking = false;
+
+    [Space]
+    public int HP = 10;
+    public void AddHP(double num)
+    {
+        HP += (int)num;
+        Debug.Log("Current HP: " + HP);
+    }
+
+    private string playerName;
+
+    private float movementInput;
+    private Rigidbody2D rb;
+    private Collider2D coll;
+    private Animator anim;
+    private GameObject playerAttack;
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody2D = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        coll = GetComponent<Collider2D>();
     }
     // Update is called once per frame
     void Update()
     {
         if (!controlEnabled)
         {
+            movementInput = 0.0f;
             return;
         }
 
-        // Fetching the horizontal input magnitude
-        moveDirection = Input.GetAxis("Horizontal");
+        // update movements
+        movementInput = Input.GetAxisRaw("Horizontal");
 
-        // Setting the animator parameters
-        animator.SetFloat("Speed", Mathf.Abs(moveDirection));
+        // update jump
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpPressed = true;
+        }
 
-        // Jump Component
-        // Allow jump if grounded and add force equal to jumpForce
-        if (Input.GetButtonDown("Jump") && isGrounded())
+        // update attack
+        if (Input.GetButtonDown("Fire1"))
         {
-            rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpForce);
-            // Set the animator parameter to true
-            animator.SetBool("IsJumping", true);
+            isAttacking = true;
         }
-        else
+        else if (Input.GetButtonUp("Fire1"))
         {
-            // Set the animator parameter to false
-            animator.SetBool("IsJumping", false);
+            isAttacking = false;
         }
-        // If jump button is released and velocity is greater than 0, reduce velocity to add float effect
-        if (Input.GetButtonUp("Jump") && rigidBody2D.velocity.y > 0f)
-        {
-            rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, rigidBody2D.velocity.y * jumpFloat);
-        }
-        
-        changeDirection();
+
+
     }
 
     void FixedUpdate()
     {
-        if (!controlEnabled)
+        isGrounded = Physics2D.OverlapCircle(GroundCheck.position, collisionOffset, groundLayer);
+        GroundMovement();
+        Jump();
+        SwitchAnim();
+    }
+
+    public void GroundMovement()
+    {
+        if (isAttacking)
         {
-            // clear movement
-            rigidBody2D.velocity = Vector2.zero;
+            rb.velocity = new Vector2(0, rb.velocity.y);
             return;
         }
-        rigidBody2D.velocity = new Vector2(moveDirection * moveSpeed, rigidBody2D.velocity.y);
+
+        rb.velocity = new Vector2(movementInput * moveSpeed, rb.velocity.y);
+        if (movementInput > 0)
+        {
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else if (movementInput < 0)
+        {
+            transform.localScale = new Vector3(-1.0f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+
     }
 
-    private bool isGrounded()
+    public void Jump()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
-    }
-    
-    // Method to change direction when face and move direction are not same
-    private void changeDirection()
-    {
-        if (faceDirection && moveDirection < 0f || !faceDirection && moveDirection > 0f)
+        if (isAttacking)
         {
-            faceDirection = !faceDirection;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            return;
+        }
+
+        if (isGrounded)
+        {
+            jumpCount = maxJumpCount;
+            isJumping = false;
+        }
+        if (jumpPressed && isGrounded)
+        {
+            isJumping = true;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            --jumpCount;
+            jumpPressed = false;
+        }
+        else if (jumpPressed && jumpCount > 0 && isJumping)
+        {
+            isJumping = true;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            --jumpCount;
+            jumpPressed = false;
         }
     }
 
-    void OnDrawGizmosSelected()
+    public void SwitchAnim()
     {
-        // Display the ground checking radius when selected
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
+        anim.SetFloat("Speed", Mathf.Abs(movementInput));
+        
+        if (isJumping)
+        {
+            anim.SetBool("IsJumping", true);
+        }
+        else
+        {
+            anim.SetBool("IsJumping", false);
+        }
+        
+        if (isAttacking)
+        {
+            anim.SetTrigger("IsAttacking");
+        }
     }
 
 }
