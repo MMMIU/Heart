@@ -1,3 +1,4 @@
+using PixelCrushers.DialogueSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,56 +7,41 @@ public class SpiritControl : MonoBehaviour
 {
 
     // Variables
-    public float x_offset;
-    public float y_offset;
-
-
-    public GameObject player;
-    public BoxCollider2D boxCollider;
-    public SpriteRenderer spriteRenderer;
+    public Vector2 offset;
     public Sprite spiritSprite;
-    public Animator animator;
-
-    public Collider2D killZone;
+    
+    private GameObject player;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    private Rigidbody2D rb;
+    private Collider2D coll;
 
     // Start is called before the first frame update
     void Start()
     {
         // Get components and player
         spriteRenderer = GetComponent<SpriteRenderer>();
-        boxCollider = GetComponent<BoxCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<Collider2D>();
     }
-
-    // On trigger enter
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+    public void AttachToPlayer()
     {
-        // If player collides with killZone
-        if (collision.gameObject.CompareTag("KillZone") && collision.gameObject.CompareTag("Player"))
-        {
-            // Change sprite to spirit sprite
-            changeSprite();
-            this.transform.parent = player.transform;
-            // Remove box collider
-            boxCollider.enabled = false;
-            // Disable animator
-            animator.enabled = false;
-            reposition();
-        }
-    }
-
-    // Change sprite method
-    void changeSprite()
-    {
+        // Change sprite to spirit sprite
         spriteRenderer.sprite = spiritSprite;
-    }
-
-    void reposition()
-    {
+        // Attach to player
+        transform.parent = player.transform;
+        // Disable animator
+        animator.enabled = false;
+        // Disable rigidbody
+        rb.isKinematic = true;
+        // Disable collider
+        coll.enabled = false;
         // Move spirit to player and make it hover over the player
-        this.transform.position = player.transform.position;
-        this.transform.position = new Vector3(this.transform.position.x + x_offset, this.transform.position.y + y_offset, this.transform.position.z);
+        transform.position = player.transform.position;
+        transform.position = new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, transform.position.z);
     }
-
+    
 }

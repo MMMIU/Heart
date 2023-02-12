@@ -46,16 +46,15 @@ public class PlayerMovement : MonoBehaviour
 
     private float movementInput;
     private Rigidbody2D rb;
-    private Collider2D coll;
     private Animator anim;
-    private GameObject playerAttack;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        coll = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     // Update is called once per frame
     void Update()
@@ -107,11 +106,11 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(movementInput * moveSpeed, rb.velocity.y);
         if (movementInput > 0)
         {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            spriteRenderer.flipX = false;
         }
         else if (movementInput < 0)
         {
-            transform.localScale = new Vector3(-1.0f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            spriteRenderer.flipX = true;
         }
 
     }
