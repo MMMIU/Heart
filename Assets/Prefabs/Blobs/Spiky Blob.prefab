@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 2507681203037362144}
   m_Layer: 7
   m_Name: Spiky Blob
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,7 +139,6 @@ MonoBehaviour:
     m_Bits: 64
   jumpForce: 5.5
   moveForce: 3.5
-  jumpReloadTimeInSec: 0.4
   fallingGravityScale: 3
 --- !u!50 &5195325702015963999
 Rigidbody2D:
@@ -210,6 +209,7 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: 0}
   currHealth: 0
   knockbackForce: 1.1
+  ableToAttack: 1
 --- !u!114 &2507681203037362144
 MonoBehaviour:
   m_ObjectHideFlags: 0
