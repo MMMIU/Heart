@@ -1301,6 +1301,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &279489856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2862708498505739732, guid: 4741b5bc24a963d429f5f32ba1f4392f, type: 3}
+  m_PrefabInstance: {fileID: 1516438629}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &287484901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,6 +1316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 287484902}
   - component: {fileID: 287484903}
+  - component: {fileID: 287484904}
   m_Layer: 0
   m_Name: PlayerRespawnPoint
   m_TagString: Untagged
@@ -1347,6 +1353,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 1245962082}
   bossGO: {fileID: 1047629863}
+--- !u!114 &287484904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287484901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f918e73516eb22f48bc838b8f91f6dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specificLevel: 3
+  onLoadingLevel:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 764909763}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!212 &324376251
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1671,6 +1705,11 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &570523944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2862708498505739732, guid: 4741b5bc24a963d429f5f32ba1f4392f, type: 3}
+  m_PrefabInstance: {fileID: 593590703}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &593590703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1681,6 +1720,10 @@ PrefabInstance:
     - target: {fileID: 2862708498505739732, guid: 4741b5bc24a963d429f5f32ba1f4392f, type: 3}
       propertyPath: m_Name
       value: TriggerPointDisable
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862708498505739732, guid: 4741b5bc24a963d429f5f32ba1f4392f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2862708498505739734, guid: 4741b5bc24a963d429f5f32ba1f4392f, type: 3}
       propertyPath: m_RootOrder
@@ -1741,6 +1784,42 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2862708498505739734, guid: 4741b5bc24a963d429f5f32ba1f4392f, type: 3}
   m_PrefabInstance: {fileID: 593590703}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &593590707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570523944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cedf348ece7ef64aa74cb295e8ed71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 1
+  once: 0
+  observeGameObject: {fileID: 0}
+  condition:
+    luaConditions:
+    - Variable["Finished_L1C1_turns_to_fear_sprite"] == true
+    - Variable["Finished_L1C2_after_turns_to_fear_sprite"] == true
+    - Variable["Finished_L1C3_Anger_turns_to_sprite"] == true
+    questConditions: []
+    acceptedTags: []
+    acceptedGameObjects: []
+    luaWizardIndex: -1
+    lastEvaluationValue: 0
+  questName: 
+  questState: 0
+  luaCode: 
+  sequence: 
+  alertMessage: 
+  textTable: {fileID: 0}
+  sendMessages:
+  - gameObject: {fileID: 570523944}
+    message: OnEnableTrigger
+    parameter: 
+  useQuestNamePicker: 1
 --- !u!1 &656366144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,7 +1899,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656366144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 2.4, z: -9.954979}
+  m_LocalPosition: {x: -13.4, y: -9, z: -9.954979}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2585,7 +2664,7 @@ MonoBehaviour:
   setAnotherQuestEntryState: 0
   anotherQuestEntryNumber: 1
   anotherQuestEntryState: 0
-  luaCode: 
+  luaCode: Variable["Talked_to_Masked_Love_NPC"] = true
   sequence: 
   sequenceSpeaker: {fileID: 0}
   sequenceListener: {fileID: 0}
@@ -2937,7 +3016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fbb10eb9637a74b8e28d0e8f6dd154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 1410059872}
   levelNumber: 1
   hasBoss: 0
   bossSpawnPoint: {fileID: 0}
@@ -3760,6 +3839,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 764909765}
     - target: {fileID: 2862708498505739735, guid: 4741b5bc24a963d429f5f32ba1f4392f, type: 3}
+      propertyPath: triggerEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862708498505739735, guid: 4741b5bc24a963d429f5f32ba1f4392f, type: 3}
       propertyPath: triggerEnableDelay
       value: 0.2
       objectReference: {fileID: 0}
@@ -3830,6 +3913,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1881838693}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!223 &978839592
 Canvas:
@@ -4636,7 +4731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664473692}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 2.4, z: 0.0450207}
+  m_LocalPosition: {x: -13.4, y: -9, z: 0.0450207}
   m_LocalScale: {x: 1.593931, y: 1.593931, z: 1.593931}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5254,6 +5349,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1881838695}
     - target: {fileID: 2862708498505739735, guid: 4741b5bc24a963d429f5f32ba1f4392f, type: 3}
+      propertyPath: triggerEnabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862708498505739735, guid: 4741b5bc24a963d429f5f32ba1f4392f, type: 3}
       propertyPath: triggerEnableDelay
       value: 0.2
       objectReference: {fileID: 0}
@@ -5691,6 +5790,40 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2862708498505739734, guid: 4741b5bc24a963d429f5f32ba1f4392f, type: 3}
   m_PrefabInstance: {fileID: 1516438629}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1516438633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279489856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cedf348ece7ef64aa74cb295e8ed71c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 1
+  once: 0
+  observeGameObject: {fileID: 0}
+  condition:
+    luaConditions:
+    - Variable["Talked_to_Masked_Love_NPC"] == true
+    questConditions: []
+    acceptedTags: []
+    acceptedGameObjects: []
+    luaWizardIndex: -1
+    lastEvaluationValue: 0
+  questName: 
+  questState: 0
+  luaCode: 
+  sequence: 
+  alertMessage: 
+  textTable: {fileID: 0}
+  sendMessages:
+  - gameObject: {fileID: 279489856}
+    message: OnEnableTrigger
+    parameter: 
+  useQuestNamePicker: 1
 --- !u!1 &1568096660
 GameObject:
   m_ObjectHideFlags: 0
@@ -5992,6 +6125,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 394943240}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1881838693
 GameObject:
   m_ObjectHideFlags: 0
@@ -6038,7 +6183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fbb10eb9637a74b8e28d0e8f6dd154, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 1410059872}
   levelNumber: 1
   hasBoss: 0
   bossSpawnPoint: {fileID: 0}
@@ -6218,7 +6363,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2125321962}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 2.4, z: -9.954979}
+  m_LocalPosition: {x: -13.4, y: -9, z: -9.954979}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -8,16 +8,23 @@ public class TriggerPoint : MonoBehaviour
     [SerializeField]
     private LevelManager levelManager;
     [SerializeField]
+    private bool triggerEnabled = false;
+    [SerializeField]
     private float triggerEnableDelay = 1f;
     [SerializeField]
     private enum TriggerType { ENABLE, DISABLE }
     [SerializeField]
     private TriggerType triggerType = TriggerType.ENABLE;
 
+    public void OnEnableTrigger()
+    {
+        triggerEnabled = true;
+    }
+    
     // if touched triggerEnablePoint, enable trigger after 1s
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (triggerEnabled && other.CompareTag("Player"))
         {
             if (triggerType == TriggerType.ENABLE)
             {
