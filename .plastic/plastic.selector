@@ -1,4 +1,0 @@
-repository "Heart@WorseKneeDeer@cloud"
-  path "/"
-    br "/main"
-    co "/main"
