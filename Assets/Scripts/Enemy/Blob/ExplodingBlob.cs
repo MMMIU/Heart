@@ -20,6 +20,7 @@ public class ExplodingBlob : EnemyAI, IBlob
     void Start()
     {
         FindPlayerPos();
+        currHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -35,7 +36,6 @@ public class ExplodingBlob : EnemyAI, IBlob
     public void Attack()
     {
         StartCoroutine(StartAttack());
-
     }
 
     IEnumerator StartAttack()
@@ -46,7 +46,7 @@ public class ExplodingBlob : EnemyAI, IBlob
     }
 
     IEnumerator TriggerExplosion()
-    {        
+    {
         if (explosionVFX == null)
         {
             Debug.LogError("No explosion VFX allocated");
@@ -70,6 +70,7 @@ public class ExplodingBlob : EnemyAI, IBlob
         rigidbody2D.AddForce(knockbackDir * knockbackForce, ForceMode2D.Impulse);
 
         // Do damage
+        playerMovement.TakeDamage(1);
     }
 
     public void Death(float deathWaitTime = 0)
@@ -81,9 +82,9 @@ public class ExplodingBlob : EnemyAI, IBlob
     {
         currHealth -= damage;
 
-        if(currHealth < 0)
+        if (currHealth < 0)
         {
-            Death();
+            Death(deathWaitTime);
         }
     }
 

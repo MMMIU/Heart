@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -36,13 +37,13 @@ public class PlayerMovement : MonoBehaviour
 
     [Space]
     public int HP = 10;
-    public void AddHP(double num)
-    {
-        HP += (int)num;
-        Debug.Log("Current HP: " + HP);
-    }
+    public int lowHP1 = 1;
+    public UnityEvent OnPlayerLowHP1;
+    public int lowHP2 = 6;
+    public UnityEvent OnPlayerLowHP2;
 
-    private string playerName;
+    // player die event
+    public UnityEvent OnPlayerDie;
 
     private float movementInput;
     private Rigidbody2D rb;
@@ -83,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
         {
             isAttacking = false;
         }
-
 
     }
 
@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
     public void SwitchAnim()
     {
         anim.SetFloat("Speed", Mathf.Abs(movementInput));
-        
+
         if (isJumping)
         {
             anim.SetBool("IsJumping", true);
@@ -155,11 +155,47 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("IsJumping", false);
         }
-        
+
         if (isAttacking)
         {
             anim.SetTrigger("IsAttacking");
         }
     }
 
+    public void AddHP(double num)
+    {
+        HP += (int)num;
+        Debug.Log("Current HP: " + HP);
+    }
+    
+    // player hurt
+    public void TakeDamage(int value)
+    {
+        HP -= value;
+        Debug.Log("Current HP: " + HP);
+        // if hp <= 0, invoke player die event
+        if (HP <= 0)
+        {
+            HP = 0;
+            OnPlayerDie.Invoke();
+            return;
+        }
+        // if hp <= lowHP2, invoke lowHP2 event
+        else if (HP <= lowHP2)
+        {
+            OnPlayerLowHP2.Invoke();
+            return;
+        }
+        // if hp <= lowHP1, invoke lowHP1 event
+        else if (HP <= lowHP1)
+        {
+            OnPlayerLowHP1.Invoke();
+            return;
+        }
+    }
+
+    public void SetPosition(Transform pos)
+    {
+        transform.position = pos.position;
+    }
 }

@@ -6,6 +6,8 @@ public class SpikyBlob : EnemyAI, IBlob
 {
     [SerializeField]
     float knockbackForce = 2f;
+    [SerializeField]
+    bool ableToAttack = true;
 
     // Start is called before the first frame update
     void Start()
@@ -17,16 +19,26 @@ public class SpikyBlob : EnemyAI, IBlob
     // Update is called once per frame
     void Update()
     {
-        if (CheckForPlayer)
+        if (ableToAttack && CheckForPlayer)
         {
             Attack();
+            ableToAttack = false;
+            StartCoroutine(SetAbleToAttack());
         }
+    }
+
+    // set ableToAttack after time
+    IEnumerator SetAbleToAttack()
+    {
+        yield return new WaitForSeconds(EnemyBlobMovement.GetJumpReloadTimeInSec());
+        ableToAttack = true;
     }
 
     public void Attack()
     {
         ApplyKnockBack();
         // do damage to player
+        playerMovement.TakeDamage(1);
     }
 
     void ApplyKnockBack()

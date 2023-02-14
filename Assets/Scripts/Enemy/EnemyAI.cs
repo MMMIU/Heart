@@ -23,6 +23,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     protected float currHealth;
     protected Transform playerPos;
+    protected PlayerMovement playerMovement;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class EnemyAI : MonoBehaviour
     protected void FindPlayerPos()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        playerMovement = playerPos.GetComponent<PlayerMovement>();
     }
 
     protected bool CheckForPlayer => Physics2D.OverlapCircle(transform.position + offset, playerDetectionRadius, playerLayer);

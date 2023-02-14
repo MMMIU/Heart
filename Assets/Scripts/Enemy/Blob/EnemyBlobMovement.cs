@@ -10,13 +10,13 @@ public class EnemyBlobMovement : MonoBehaviour
     Transform groundCheck;
     [SerializeField]
     LayerMask groundLayer;
-    
+
     [SerializeField]
     float jumpForce = 2f;
     [SerializeField]
     float moveForce = 1f;
     [SerializeField]
-    float jumpReloadTimeInSec = 2f;
+    const float jumpReloadTimeInSec = 2f;
     [SerializeField]
     float fallingGravityScale = 2f;
 
@@ -32,24 +32,26 @@ public class EnemyBlobMovement : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
         blobAnimation = new(GetComponent<Animator>());
     }
+    public static float GetJumpReloadTimeInSec() => jumpReloadTimeInSec;
 
     // Update is called once per frame
     void FixedUpdate()
     {
         // Need blob to jump around Vector.up * jumpForce * Time.deltaTime
-        if (isGrounded) {
+        if (isGrounded)
+        {
             blobAnimation?.SetTrigger(BlobAnimation.Animation_States.Squat);
             rigidbody.gravityScale = 1f;
             elapsedTime += Time.deltaTime;
-            
-            if(elapsedTime > jumpReloadTimeInSec)
+
+            if (elapsedTime > jumpReloadTimeInSec)
             {
                 elapsedTime = 0;
                 Jump();
             }
         }
 
-        if(rigidbody.velocity.y < 0)
+        if (rigidbody.velocity.y < 0)
         {
             rigidbody.gravityScale = fallingGravityScale;
             isFalling = true;
@@ -78,7 +80,7 @@ public class EnemyBlobMovement : MonoBehaviour
     {
         Vector2 relativePos = gameObject.transform.position - player.position;
 
-        if(relativePos.x < 0)
+        if (relativePos.x < 0)
         {
             // move to the right
             transform.rotation = Quaternion.Euler(0, 0, 0);

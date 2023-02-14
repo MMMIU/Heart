@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PixelCrushers.DialogueSystem;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +11,8 @@ namespace Enemy
         public UnityEvent OnBossDefeated;
 
         [Header("Boss settings")]
+        [SerializeField]
+        private bool desrtoyWhenDefeated = false;
         [SerializeField]
         private int blobsToSpawnWhenBossDies = 5;
         [SerializeField]
@@ -32,7 +35,7 @@ namespace Enemy
         private List<EnemyAI> differentTypesOfEnemies = new List<EnemyAI>();
         [SerializeField]
         private int maxBlobsToSpawn = 5;
-        
+
         private List<IBlob> blobs = new();
 
         [Space]
@@ -53,6 +56,7 @@ namespace Enemy
         [Space]
         [Header("Player")]
         private GameObject player;
+        private PlayerMovement playerMovement;
 
         private float bossAliveTime = 0.0f;
         private float nextSpawnTime = 0.0f;
@@ -91,24 +95,54 @@ namespace Enemy
             Application.Quit();
 #endif
             }
-        }
-        private void OnDisable()
-        {
-            OnBossDefeated.RemoveAllListeners();
-        }
 
-        // Use this for initialization
-        void Start()
-        {
             // Get player
             player = GameObject.FindGameObjectWithTag("Player");
             if (player == null)
             {
                 Debug.LogError("Player not found");
             }
+            playerMovement = player.GetComponent<PlayerMovement>();
+            // hook player lowHp1
+            playerMovement.OnPlayerLowHP1.AddListener(PlayerLowHp1);
+            // hook player lowHp2
+            playerMovement.OnPlayerLowHP2.AddListener(PlayerLowHp2);
+
             maxThrowDistance = (player.transform.position.x - transform.position.x) / 2;
             minThrowDistance = maxThrowDistance / 2;
             nextSpawnTime = minTimeBetweenBlobs;
+        }
+
+        private void OnDisable()
+        {
+            OnBossDefeated.RemoveAllListeners();
+            // remove playerMovement listeners
+            playerMovement.OnPlayerLowHP1.RemoveListener(PlayerLowHp1);
+            playerMovement.OnPlayerLowHP2.RemoveListener(PlayerLowHp2);
+        }
+
+        [SerializeField]
+        private GameObject playerStartCombatDialogueTrigger;
+        // player lowHp1 conversation
+        IEnumerator PlayerStartCombat(float time)
+        {
+            yield return new WaitForSeconds(time);
+            playerStartCombatDialogueTrigger?.SetActive(true);
+        }
+
+        [SerializeField]
+        private GameObject playerLowHp1DialogueTrigger;
+        public void PlayerLowHp1()
+        {
+            playerLowHp1DialogueTrigger?.SetActive(true);
+        }
+
+        [SerializeField]
+        private GameObject playerLowHp2DialogueTrigger;
+        public void PlayerLowHp2()
+        {
+            Debug.Log("PlayerLowHp2 triggered");
+            playerLowHp2DialogueTrigger?.SetActive(true);
         }
 
         // Update is called once per frame
@@ -125,6 +159,8 @@ namespace Enemy
                 if (blobs.Count < maxBlobsToSpawn)
                 {
                     SpawnBlob(true);
+                    // call PlayerStartCombat after 1s
+                    StartCoroutine(PlayerStartCombat(1.0f));
                 }
                 CalcNextSpawnTime();
             }
@@ -145,7 +181,7 @@ namespace Enemy
             // generate random blob
             int blobIndex = Random.Range(0, differentTypesOfEnemies.Count);
             EnemyAI randomEnemy = differentTypesOfEnemies[blobIndex];
-            
+
             var blobGO = Instantiate(randomEnemy, transform.position, Quaternion.identity);
 
 
@@ -167,7 +203,7 @@ namespace Enemy
 
         }
 
-        public void OnDamage(int damage)
+        public void TakeDamage(int damage)
         {
             HP -= damage;
 
@@ -184,17 +220,21 @@ namespace Enemy
                 // kill all blobs
                 foreach (var blob in blobs)
                 {
-                    blob.TakeDamage(100000000);
+                    blob.TakeDamage(10086);
                 }
 
                 Debug.Log("Boss defeated");
+                spawnBlobs = false;
                 // spawn final blobs
                 for (int i = 0; i < blobsToSpawnWhenBossDies; ++i)
                 {
                     SpawnBlob(false);
                 }
                 OnBossDefeated?.Invoke();
-                Destroy(gameObject);
+                if (desrtoyWhenDefeated)
+                {
+                    Destroy(gameObject);
+                }
             }
         }
 

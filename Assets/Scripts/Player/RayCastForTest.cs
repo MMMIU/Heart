@@ -28,7 +28,7 @@ namespace Assets.Scripts.player
                     // if has boss component, call OnDamage(1)
                     if (hit2D.collider.GetComponent<Boss>())
                     {
-                        hit2D.collider.GetComponent<Boss>().OnDamage(1);
+                        hit2D.collider.GetComponent<Boss>().TakeDamage(1);
                     }
                     // if has blob component, call OnDamage(1)
                     else
