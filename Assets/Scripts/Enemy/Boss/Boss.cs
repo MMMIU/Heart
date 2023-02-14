@@ -182,8 +182,7 @@ namespace Enemy
             int blobIndex = Random.Range(0, differentTypesOfEnemies.Count);
             EnemyAI randomEnemy = differentTypesOfEnemies[blobIndex];
 
-            var blobGO = Instantiate(randomEnemy, transform.position, Quaternion.identity);
-
+            var blobGO = Instantiate(randomEnemy, transform.position, Quaternion.identity, transform.parent);
 
             float angle = Random.Range(minThrowAngle, maxThrowAngle);
 
