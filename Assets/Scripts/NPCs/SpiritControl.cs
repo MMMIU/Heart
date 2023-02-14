@@ -42,6 +42,8 @@ public class SpiritControl : MonoBehaviour
         // Move spirit to player and make it hover over the player
         transform.position = player.transform.position;
         transform.position = new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, transform.position.z);
+        // set order in layer to -10086
+        spriteRenderer.sortingOrder = -10086;
     }
-    
+
 }

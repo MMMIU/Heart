@@ -19,16 +19,9 @@ namespace Enemy
         [SerializeField]
         private bool isAlive = true;
 
-        [SerializeField]
-        private bool isTriggered = false;
         public void SetBossTriggered(bool value)
         {
-            isTriggered = value;
-        }
-
-        public bool GetBossTriggered()
-        {
-            return isTriggered;
+            spawnBlobs = value;
         }
 
         [Space]
@@ -121,7 +114,7 @@ namespace Enemy
         // Update is called once per frame
         void Update()
         {
-            if (!isTriggered)
+            if (!spawnBlobs)
             {
                 return;
             }

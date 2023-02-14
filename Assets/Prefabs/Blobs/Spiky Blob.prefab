@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 5195325702015963986}
   - component: {fileID: 2507681203037362144}
   m_Layer: 7
-  m_Name: Blob Enemy
+  m_Name: Spiky Blob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
