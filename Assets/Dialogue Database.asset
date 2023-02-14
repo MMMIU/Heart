@@ -428,6 +428,20 @@ MonoBehaviour:
       value: Level 2 Conversation 6 ( Sad
       type: 0
       typeString: 
+  - id: 14
+    fields:
+    - title: Name
+      value: Number of conversation skipped
+      type: 0
+      typeString: 
+    - title: Initial Value
+      value: 0
+      type: 1
+      typeString: CustomFieldType_Number
+    - title: Description
+      value: "\u8D8A\u591A\u8D8A\u5BC4"
+      type: 0
+      typeString: 
   conversations:
   - id: 1
     fields:
@@ -3864,8 +3878,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 99.84125, y: 52.29532}
-    canvasZoom: 1.06
+    canvasScrollPosition: {x: 147.51276, y: 17.763247}
+    canvasZoom: 1.4799995
   - id: 7
     fields:
     - title: Title
@@ -4386,8 +4400,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 2.4293432, y: 1.7245007}
-    canvasZoom: 1.0899999
+    canvasScrollPosition: {x: 99.30672, y: 35.40723}
+    canvasZoom: 1.3899996
   - id: 8
     fields:
     - title: Title
@@ -4789,8 +4803,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 208.42494, y: 0}
-    canvasZoom: 0.85000014
+    canvasScrollPosition: {x: 289.77023, y: 75.40761}
+    canvasZoom: 1.3599997
   - id: 9
     fields:
     - title: Title
@@ -5544,7 +5558,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 314.05655
+        x: 315.63135
         y: 288.18866
         width: 160
         height: 30
@@ -6075,8 +6089,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 62.350037, y: 60.61634}
-    canvasZoom: 0.73000026
+    canvasScrollPosition: {x: 111.81105, y: 172.94748}
+    canvasZoom: 1.2699997
   - id: 11
     fields:
     - title: Title
