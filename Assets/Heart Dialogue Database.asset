@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 935899b62f48ae5498594680ed17d133, type: 3}
-  m_Name: Dialogue Database
+  m_Name: Heart Dialogue Database
   m_EditorClassIdentifier: 
   version: 1.5.1.0
   author: Yifei Miao
@@ -307,7 +307,7 @@ MonoBehaviour:
     - title: Initial Value
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Description
       value: 
       type: 0
@@ -466,6 +466,34 @@ MonoBehaviour:
       value: 
       type: 0
       typeString: 
+  - id: 19
+    fields:
+    - title: Name
+      value: Finished L3C1
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Initial Value
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+  - id: 18
+    fields:
+    - title: Name
+      value: 'Hope turns to sprite '
+      type: 0
+      typeString: 
+    - title: Initial Value
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Description
+      value: Level 3 Conversation 2
+      type: 0
+      typeString: 
   - id: 12
     fields:
     - title: Name
@@ -548,20 +576,6 @@ MonoBehaviour:
       typeString: CustomFieldType_Boolean
     - title: Description
       value: 
-      type: 0
-      typeString: 
-  - id: 18
-    fields:
-    - title: Name
-      value: 'Hope turns to sprite '
-      type: 0
-      typeString: 
-    - title: Initial Value
-      value: False
-      type: 2
-      typeString: CustomFieldType_Boolean
-    - title: Description
-      value: Level 3 Conversation 2
       type: 0
       typeString: 
   conversations:
@@ -11487,7 +11501,7 @@ MonoBehaviour:
         height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 1
+    canvasZoom: 1.3299997
   - id: 21
     fields:
     - title: Title
@@ -11507,7 +11521,7 @@ MonoBehaviour:
       type: 5
       typeString: CustomFieldType_Actor
     - title: Conversant
-      value: 1
+      value: 7
       type: 5
       typeString: CustomFieldType_Actor
     overrideSettings:
@@ -11553,11 +11567,11 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -11624,7 +11638,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -11638,7 +11652,7 @@ MonoBehaviour:
       - title: Dialogue Text
         value: 'I''m sorry to hear that, it seems desperation has really driven you
           to the edge, little one. '
-        type: 4
+        type: 0
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -11677,8 +11691,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 387
-        y: 103
+        x: 387.7519
+        y: 103.75188
         width: 160
         height: 30
     - id: 2
@@ -11696,7 +11710,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -11709,7 +11723,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: I know you're in a lot of pain and confusion.
-        type: 4
+        type: 0
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -11767,7 +11781,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -11780,7 +11794,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: But you should know that underneath the despair there is always hope.
-        type: 4
+        type: 0
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -11819,7 +11833,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 386
+        x: 387.50375
         y: 214
         width: 160
         height: 30
@@ -11838,7 +11852,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -11851,7 +11865,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: The end is a new beginning, little one.
-        type: 4
+        type: 0
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -11919,7 +11933,7 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -11928,7 +11942,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: ' Who are you?'
-        type: 4
+        type: 0
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -11968,7 +11982,7 @@ MonoBehaviour:
       canvasRect:
         serializedVersion: 2
         x: 294.4286
-        y: 332.5179
+        y: 333.2698
         width: 160
         height: 30
     - id: 6
@@ -11990,7 +12004,7 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: 1
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -11999,7 +12013,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: (I think I know the answer...)
-        type: 4
+        type: 0
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -12057,7 +12071,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -12070,7 +12084,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: ' I am hope.'
-        type: 4
+        type: 0
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -12128,7 +12142,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -12141,7 +12155,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: This is a gift for you.
-        type: 4
+        type: 0
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -12199,7 +12213,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 1
+        value: 7
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
@@ -12212,7 +12226,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: ' Keep going up and don''t look behind, you will find your way back.'
-        type: 4
+        type: 0
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -12250,8 +12264,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 1
+    canvasScrollPosition: {x: 0, y: 163.39291}
+    canvasZoom: 1.1199999
   - id: 22
     fields:
     - title: Title
@@ -12401,7 +12415,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: I believe in you.
-        type: 4
+        type: 0
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -12510,8 +12524,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 1
+    canvasScrollPosition: {x: 147.09726, y: 2.5642624}
+    canvasZoom: 1.8099992
   - id: 23
     fields:
     - title: Title
@@ -21718,4 +21732,13 @@ MonoBehaviour:
     syncItemsDatabase: {fileID: 0}
     syncLocationsDatabase: {fileID: 0}
     syncVariablesDatabase: {fileID: 0}
-  templateJson: 
+  templateJson: '{"treatItemsAsQuests":true,"actorFields":[{"title":"Name","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"IsPlayer","value":"False","type":2,"typeString":"CustomFieldType_Boolean"}],"itemFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":""},{"title":"Is
+    Item","value":"True","type":2,"typeString":"CustomFieldType_Boolean"}],"questFields":[{"title":"Name","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Success
+    Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Failure
+    Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"State","value":"unassigned","type":0,"typeString":"CustomFieldType_QuestState"},{"title":"Is
+    Item","value":"False","type":2,"typeString":"CustomFieldType_Boolean"}],"locationFields":[{"title":"Name","value":"","type":0,"typeString":""},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":""}],"variableFields":[{"title":"Name","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Initial
+    Value","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"}],"conversationFields":[{"title":"Title","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Actor","value":"0","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Conversant","value":"0","type":5,"typeString":"CustomFieldType_Actor"}],"dialogueEntryFields":[{"title":"Title","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Pictures","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Description","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Actor","value":"","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Conversant","value":"","type":5,"typeString":"CustomFieldType_Actor"},{"title":"Menu
+    Text","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Dialogue
+    Text","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Parenthetical","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Audio
+    Files","value":"[]","type":3,"typeString":"CustomFieldType_Files"},{"title":"Video
+    File","value":"","type":0,"typeString":"CustomFieldType_Text"},{"title":"Sequence","value":"","type":0,"typeString":"CustomFieldType_Text"}],"actorPrimaryFieldTitles":[],"itemPrimaryFieldTitles":[],"questPrimaryFieldTitles":[],"locationPrimaryFieldTitles":[],"variablePrimaryFieldTitles":[],"conversationPrimaryFieldTitles":[],"dialogueEntryPrimaryFieldTitles":[],"npcLineColor":{"r":1.0,"g":0.0,"b":0.0,"a":1.0},"pcLineColor":{"r":0.0,"g":0.0,"b":1.0,"a":1.0},"repeatLineColor":{"r":0.5,"g":0.5,"b":0.5,"a":1.0}}'
