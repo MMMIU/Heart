@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isAttacking = false;
 
     [Space]
+    public bool isHurtable = true;
     public int HP = 10;
     public int lowHP1 = 1;
     public UnityEvent OnPlayerLowHP1;
@@ -162,6 +163,15 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void SetUnHurtable(bool value)
+    {
+        if (HP <= 0)
+        {
+            HP = 1;
+        }
+        isHurtable = !value;
+    }
+    
     public void AddHP(double num)
     {
         HP += (int)num;
@@ -171,6 +181,10 @@ public class PlayerMovement : MonoBehaviour
     // player hurt
     public void TakeDamage(int value)
     {
+        if(!isHurtable)
+        {
+            return;
+        }
         HP -= value;
         Debug.Log("Current HP: " + HP);
         // if hp <= 0, invoke player die event
