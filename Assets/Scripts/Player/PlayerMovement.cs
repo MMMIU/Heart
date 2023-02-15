@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     // Control enabled
     public bool controlEnabled { get; set; } = true;
+    public bool buffed = false;
 
     [Space]
     [SerializeField]
@@ -33,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     private int jumpCount = 0;
 
     [Space]
+    [SerializeField]
+    private GameObject attackHitBox;
     private bool isAttacking = false;
 
     [Space]
@@ -77,13 +80,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // update attack
-        if (Input.GetButtonDown("Fire1"))
+        if (!isAttacking && Input.GetButtonDown("Fire1"))
         {
             isAttacking = true;
-        }
-        else if (Input.GetButtonUp("Fire1"))
-        {
-            isAttacking = false;
+            controlEnabled = false;
         }
 
     }
@@ -159,7 +159,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (isAttacking)
         {
-            anim.SetTrigger("IsAttacking");
+            anim.SetBool("IsAttacking", true);
+        }
+        else
+        {
+            anim.SetBool("IsAttacking", false);
         }
     }
 
@@ -171,17 +175,17 @@ public class PlayerMovement : MonoBehaviour
         }
         isHurtable = !value;
     }
-    
+
     public void AddHP(double num)
     {
         HP += (int)num;
         Debug.Log("Current HP: " + HP);
     }
-    
+
     // player hurt
     public void TakeDamage(int value)
     {
-        if(!isHurtable)
+        if (!isHurtable)
         {
             return;
         }
@@ -211,5 +215,21 @@ public class PlayerMovement : MonoBehaviour
     public void SetPosition(Transform pos)
     {
         transform.position = pos.position;
+    }
+
+    public void EnableAttackable()
+    {
+        controlEnabled = true;
+        isAttacking = false;
+    }
+
+    public void EnableAttackHitBox()
+    {
+        attackHitBox.SetActive(true);
+    }
+
+    public void DisableAttackHitBox()
+    {
+        attackHitBox.SetActive(false);
     }
 }

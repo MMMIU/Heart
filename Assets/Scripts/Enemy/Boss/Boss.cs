@@ -12,13 +12,11 @@ namespace Enemy
 
         [Header("Boss settings")]
         [SerializeField]
-        private bool desrtoyWhenDefeated = false;
-        [SerializeField]
         private int blobsToSpawnWhenBossDies = 5;
         [SerializeField]
         private int HP = 100;
         [SerializeField]
-        private bool isBossDefeatable = true;
+        private bool isHurtable = true;
         [SerializeField]
         private bool isAlive = true;
 
@@ -55,13 +53,23 @@ namespace Enemy
         [SerializeField]
         private float maxThrowAngle = 60.0f;
 
-        [Space]
-        [Header("Player")]
+
+        [SerializeField]
+        private GameObject playerStartCombatDialogueTrigger;
+
+        [SerializeField]
+        private GameObject playerLowHp1DialogueTrigger;
+
+        [SerializeField]
+        private GameObject playerLowHp2DialogueTrigger;
+
         private GameObject player;
         private PlayerMovement playerMovement;
 
+
         private float bossAliveTime = 0.0f;
         private float nextSpawnTime = 0.0f;
+        private Vector3 bossFinalPosition;
 
         private void CalcNextSpawnTime()
         {
@@ -123,28 +131,30 @@ namespace Enemy
             playerMovement.OnPlayerLowHP2.RemoveListener(PlayerLowHp2);
         }
 
-        [SerializeField]
-        private GameObject playerStartCombatDialogueTrigger;
         // player lowHp1 conversation
         IEnumerator PlayerStartCombat(float time)
         {
             yield return new WaitForSeconds(time);
-            playerStartCombatDialogueTrigger?.SetActive(true);
+            if (playerStartCombatDialogueTrigger != null)
+            {
+                playerStartCombatDialogueTrigger?.SetActive(true);
+            }
         }
 
-        [SerializeField]
-        private GameObject playerLowHp1DialogueTrigger;
         public void PlayerLowHp1()
         {
-            playerLowHp1DialogueTrigger?.SetActive(true);
+            if (playerLowHp1DialogueTrigger != null)
+            {
+                playerLowHp1DialogueTrigger?.SetActive(true);
+            }
         }
 
-        [SerializeField]
-        private GameObject playerLowHp2DialogueTrigger;
         public void PlayerLowHp2()
         {
-            Debug.Log("PlayerLowHp2 triggered");
-            playerLowHp2DialogueTrigger?.SetActive(true);
+            if (playerLowHp2DialogueTrigger != null)
+            {
+                playerLowHp2DialogueTrigger?.SetActive(true);
+            }
         }
 
         // Update is called once per frame
@@ -171,10 +181,6 @@ namespace Enemy
 
         private void SpawnBlob(bool bindToBoss)
         {
-            if (!spawnBlobs)
-            {
-                return;
-            }
             Vector2 targetPos = new(transform.position.x, transform.position.y);
             targetPos.x += Random.Range(minThrowDistance, maxThrowDistance);
 
@@ -184,18 +190,18 @@ namespace Enemy
             int blobIndex = Random.Range(0, differentTypesOfEnemies.Count);
             EnemyAI randomEnemy = differentTypesOfEnemies[blobIndex];
 
-            var blobGO = Instantiate(randomEnemy, transform.position, Quaternion.identity, blobParentGO.transform);
+            var blobGO = Instantiate(randomEnemy, isAlive ? transform.position : bossFinalPosition, Quaternion.identity, blobParentGO.transform);
 
             float angle = Random.Range(minThrowAngle, maxThrowAngle);
 
-            Vector2 speed = CalculateVelocity2D(startPos, targetPos, angle);
+            Vector2 speed = CalculateVelocity2D(startPos, targetPos, angle, isAlive);
+
             blobGO.GetComponent<Rigidbody2D>().velocity = speed;
 
             IBlob blob = blobGO.GetComponent<IBlob>();
             if (bindToBoss)
             {
                 // bind blob to boss
-
                 blobGO.GetComponent<BlobNotify>().OnBlobDefeated.AddListener(() => RemoveBlob(blob));
                 // add blob to blobs
                 blobs.Add(blob);
@@ -206,17 +212,18 @@ namespace Enemy
 
         public void TakeDamage(int damage)
         {
+            if (!isHurtable)
+            {
+                Debug.Log("Boss is not defeatable");
+                return;
+            }
+
+            Debug.Log("Boss took " + damage + " damage");
+
             HP -= damage;
 
             if (HP <= 0)
             {
-                if (!isBossDefeatable)
-                {
-                    Debug.Log("Boss is not defeatable");
-                    HP = 1;
-                    return;
-                }
-
                 isAlive = false;
                 // kill all blobs
                 foreach (var blob in blobs)
@@ -225,28 +232,33 @@ namespace Enemy
                 }
 
                 Debug.Log("Boss defeated");
+                bossFinalPosition = transform.position;
                 spawnBlobs = false;
-                // spawn final blobs
-                for (int i = 0; i < blobsToSpawnWhenBossDies; ++i)
-                {
-                    SpawnBlob(false);
-                }
+                // spawn final blobs after 1s
+                StartCoroutine(SpawnFinalBlobs(1.0f));
+
                 OnBossDefeated?.Invoke();
-                if (desrtoyWhenDefeated)
-                {
-                    Destroy(gameObject);
-                }
+            }
+        }
+
+        IEnumerator SpawnFinalBlobs(float time)
+        {
+            yield return new WaitForSeconds(time);
+            // spawn final blobs
+            for (int i = 0; i < blobsToSpawnWhenBossDies; ++i)
+            {
+                SpawnBlob(false);
             }
         }
 
         public bool SetBossDefeatable()
         {
-            return isBossDefeatable;
+            return isHurtable;
         }
 
         public void SetBossDefeatable(bool isDefeatable)
         {
-            isBossDefeatable = isDefeatable;
+            isHurtable = isDefeatable;
         }
 
         public void SetBossHP(int hp)
@@ -265,8 +277,9 @@ namespace Enemy
         }
 
         // calculate initial velocity to reach target
-        private Vector2 CalculateVelocity2D(Vector2 start, Vector2 target, float angle)
+        private Vector2 CalculateVelocity2D(Vector2 start, Vector2 target, float angle, bool facePlayer = true)
         {
+
             // define gravity
             float gravity = Physics2D.gravity.magnitude;
 
@@ -286,7 +299,13 @@ namespace Enemy
             float velocityY = Mathf.Sqrt(velocity) * Mathf.Sin(angleRad);
 
             // create and return velocity vector
-            return new Vector2(velocityX, velocityY);
+            if (facePlayer)
+            {
+                return new Vector2(target.x < start.x ? -velocityX : velocityX, velocityY);
+            }
+            // get rand of -1 or 1
+            int direction = Random.value < 0.5f ? -1 : 1;
+            return new Vector2(direction * velocityX, velocityY);
         }
     }
 }

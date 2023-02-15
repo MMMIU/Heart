@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 935899b62f48ae5498594680ed17d133, type: 3}
-  m_Name: Heart Dialogue Database
+  m_Name: Heart Dialogue Database (Auto-Backup)
   m_EditorClassIdentifier: 
   version: 1.5.1.0
   author: Yifei Miao
@@ -470,62 +470,6 @@ MonoBehaviour:
     fields:
     - title: Name
       value: Finished L3C1
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Initial Value
-      value: False
-      type: 2
-      typeString: CustomFieldType_Boolean
-    - title: Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-  - id: 20
-    fields:
-    - title: Name
-      value: Finished L4C1
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Initial Value
-      value: False
-      type: 2
-      typeString: CustomFieldType_Boolean
-    - title: Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-  - id: 21
-    fields:
-    - title: Name
-      value: Finished L5C0
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Initial Value
-      value: False
-      type: 2
-      typeString: CustomFieldType_Boolean
-    - title: Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-  - id: 22
-    fields:
-    - title: Name
-      value: Finished L5C1
-      type: 0
-      typeString: CustomFieldType_Text
-    - title: Initial Value
-      value: False
-      type: 2
-      typeString: CustomFieldType_Boolean
-    - title: Description
-      value: 
-      type: 0
-      typeString: CustomFieldType_Text
-  - id: 23
-    fields:
-    - title: Name
-      value: Finished L5C2
       type: 0
       typeString: CustomFieldType_Text
     - title: Initial Value
@@ -3832,7 +3776,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: 'Could this be heaven? '
-        type: 0
+        type: 4
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -16840,7 +16784,7 @@ MonoBehaviour:
     - title: Title
       value: Level 5 Conversation 0
       type: 0
-      typeString: CustomFieldType_Text
+      typeString: 
     - title: Pictures
       value: '[]'
       type: 3
@@ -16848,13 +16792,13 @@ MonoBehaviour:
     - title: Description
       value: 
       type: 0
-      typeString: CustomFieldType_Text
+      typeString: 
     - title: Actor
       value: 1
       type: 5
       typeString: CustomFieldType_Actor
     - title: Conversant
-      value: -1
+      value: 1
       type: 5
       typeString: CustomFieldType_Actor
     overrideSettings:
@@ -16904,7 +16848,7 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -16913,7 +16857,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: 
-        type: 0
+        type: 4
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -16961,7 +16905,7 @@ MonoBehaviour:
       - title: Title
         value: 
         type: 0
-        typeString: CustomFieldType_Text
+        typeString: 
       - title: Pictures
         value: '[]'
         type: 3
@@ -16969,27 +16913,27 @@ MonoBehaviour:
       - title: Description
         value: 
         type: 0
-        typeString: CustomFieldType_Text
+        typeString: 
       - title: Actor
         value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
         value: 
         type: 0
-        typeString: CustomFieldType_Text
+        typeString: 
       - title: Dialogue Text
         value: This trip is not too bad...
-        type: 0
-        typeString: CustomFieldType_Text
+        type: 4
+        typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
         type: 0
-        typeString: CustomFieldType_Text
+        typeString: 
       - title: Audio Files
         value: '[]'
         type: 3
@@ -16997,15 +16941,15 @@ MonoBehaviour:
       - title: Video File
         value: 
         type: 0
-        typeString: CustomFieldType_Text
+        typeString: 
       - title: Sequence
         value: 
         type: 0
-        typeString: CustomFieldType_Text
+        typeString: 
       conversationID: 32
       isRoot: 0
       isGroup: 0
-      nodeColor: 
+      nodeColor: White
       delaySimStatus: 0
       falseConditionAction: Block
       conditionPriority: 2
@@ -17017,13 +16961,13 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 400
-        y: 321
+        x: 382
+        y: 136
         width: 160
         height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 0.85000014
+    canvasZoom: 1
   - id: 33
     fields:
     - title: Title
@@ -18420,7 +18364,7 @@ MonoBehaviour:
         height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 1.1199999
+    canvasZoom: 1
   - id: 35
     fields:
     - title: Title
@@ -21278,7 +21222,7 @@ MonoBehaviour:
       type: 5
       typeString: CustomFieldType_Actor
     - title: Conversant
-      value: -1
+      value: 1
       type: 5
       typeString: CustomFieldType_Actor
     overrideSettings:
@@ -21324,11 +21268,11 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -21399,7 +21343,7 @@ MonoBehaviour:
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -21408,7 +21352,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: 'Finally, it''s time to say goodbye. '
-        type: 0
+        type: 4
         typeString: CustomFieldType_Localization
       - title: Parenthetical
         value: 
@@ -21466,11 +21410,11 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
@@ -21537,11 +21481,11 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
-        value: -1
+        value: 1
         type: 5
         typeString: CustomFieldType_Actor
       - title: Menu Text
