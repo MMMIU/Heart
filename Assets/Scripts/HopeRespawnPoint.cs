@@ -34,5 +34,7 @@ public class HopeRespawnPoint : MonoBehaviour
         gameObject.SetActive(false);
         boss.TakeDamage(10086);
         bossSpiritControl.AttachToPlayer();
+        // send OnTriggerEnter2D meesage
+        gameObject.GetComponent<LevelLoadTrigger>().LoadLevel();
     }
 }

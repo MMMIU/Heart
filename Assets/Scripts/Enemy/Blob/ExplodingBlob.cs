@@ -33,6 +33,11 @@ public class ExplodingBlob : EnemyAI, IBlob
         }
     }
 
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+    
     public void Attack()
     {
         StartCoroutine(StartAttack());

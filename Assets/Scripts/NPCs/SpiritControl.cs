@@ -9,7 +9,11 @@ public class SpiritControl : MonoBehaviour
     // Variables
     public Vector2 offset;
     public Sprite spiritSprite;
-    
+    [SerializeField]
+    private Behaviour[] componentsToDisable;
+    [SerializeField]
+    private GameObject[] objectsToDisable;
+
     private GameObject player;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -44,6 +48,16 @@ public class SpiritControl : MonoBehaviour
         transform.position = new Vector3(transform.position.x + offset.x, transform.position.y + offset.y, transform.position.z);
         // set order in layer to -10086
         spriteRenderer.sortingOrder = -10086;
+        // Disable components
+        foreach (Behaviour component in componentsToDisable)
+        {
+            component.enabled = false;
+        }
+        // Disable objects
+        foreach (GameObject obj in objectsToDisable)
+        {
+            obj.SetActive(false);
+        }
     }
 
 }

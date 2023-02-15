@@ -41,6 +41,8 @@ namespace Enemy
         [Space]
         [Header("Blobs spawn settings")]
         [SerializeField]
+        private GameObject blobParentGO;
+        [SerializeField]
         private Vector2 blobSpawnOffset = new Vector2(0.0f, 2.0f);
         [SerializeField]
         private float minTimeBetweenBlobs = 2.0f;
@@ -182,7 +184,7 @@ namespace Enemy
             int blobIndex = Random.Range(0, differentTypesOfEnemies.Count);
             EnemyAI randomEnemy = differentTypesOfEnemies[blobIndex];
 
-            var blobGO = Instantiate(randomEnemy, transform.position, Quaternion.identity, transform.parent);
+            var blobGO = Instantiate(randomEnemy, transform.position, Quaternion.identity, blobParentGO.transform);
 
             float angle = Random.Range(minThrowAngle, maxThrowAngle);
 

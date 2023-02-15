@@ -27,6 +27,11 @@ public class SpikyBlob : EnemyAI, IBlob
         }
     }
 
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+    
     // set ableToAttack after time
     IEnumerator SetAbleToAttack()
     {

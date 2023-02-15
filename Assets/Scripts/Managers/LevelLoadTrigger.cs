@@ -9,20 +9,25 @@ public class LevelLoadTrigger : MonoBehaviour
     private int specificLevel = -1;
 
     public UnityEvent onLoadingLevel;
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            onLoadingLevel.Invoke();
-            if (specificLevel == -1)
-            {
-                GameManager.instance.LoadNextLevel();
-            }
-            else
-            {
-                GameManager.instance.LoadSpecificLevel(specificLevel);
-            }
+            LoadLevel();
+        }
+    }
+
+    public void LoadLevel()
+    {
+        onLoadingLevel.Invoke();
+        if (specificLevel == -1)
+        {
+            GameManager.instance.LoadNextLevel();
+        }
+        else
+        {
+            GameManager.instance.LoadSpecificLevel(specificLevel);
         }
     }
 }
