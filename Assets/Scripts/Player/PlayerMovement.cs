@@ -108,10 +108,12 @@ public class PlayerMovement : MonoBehaviour
         if (movementInput > 0)
         {
             spriteRenderer.flipX = false;
+            attackHitBox.transform.localScale = new Vector3(1, 1, 1);
         }
         else if (movementInput < 0)
         {
             spriteRenderer.flipX = true;
+            attackHitBox.transform.localScale = new Vector3(-1, 1, 1);
         }
 
     }
