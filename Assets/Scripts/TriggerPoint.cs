@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class TriggerPoint : MonoBehaviour
 {
     [SerializeField]
-    private LevelManager levelManager;
+    private GameObject doors;
     [SerializeField]
     private bool triggerEnabled = false;
     [SerializeField]
@@ -29,14 +29,58 @@ public class TriggerPoint : MonoBehaviour
             if (triggerType == TriggerType.ENABLE)
             {
                 Debug.Log("TriggerPoint: Enable trigger");
-                levelManager?.EnableDoors(triggerEnableDelay);
+                EnableDoors(triggerEnableDelay);
             }
             else if (triggerType == TriggerType.DISABLE)
             {
                 Debug.Log("TriggerPoint: Disable trigger");
-                levelManager?.DisableDoors(triggerEnableDelay);
+                DisableDoors(triggerEnableDelay);
             }
         }
     }
 
+
+    public void DisableDoors()
+    {
+        doors.SetActive(false);
+    }
+
+    public void DisableDoors(float delay)
+    {
+        if (delay < Mathf.Epsilon)
+        {
+            DisableDoors();
+            return;
+        }
+        StartCoroutine(DisableDoorsHelper(delay));
+    }
+
+    private IEnumerator DisableDoorsHelper(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        DisableDoors();
+    }
+
+    public void EnableDoors()
+    {
+        doors.SetActive(true);
+    }
+
+    public void EnableDoors(float delay)
+    {
+        if (delay < Mathf.Epsilon)
+        {
+            EnableDoors();
+            return;
+        }
+        StartCoroutine(EnableDoorsHelper(delay));
+    }
+
+    private IEnumerator EnableDoorsHelper(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        EnableDoors();
+    }
+
+    
 }

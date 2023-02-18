@@ -634,6 +634,34 @@ MonoBehaviour:
       value: 
       type: 0
       typeString: 
+  - id: 24
+    fields:
+    - title: Name
+      value: Finished L6C0
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Initial Value
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
+  - id: 25
+    fields:
+    - title: Name
+      value: Finished L7C0
+      type: 0
+      typeString: CustomFieldType_Text
+    - title: Initial Value
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    - title: Description
+      value: 
+      type: 0
+      typeString: CustomFieldType_Text
   conversations:
   - id: 28
     fields:

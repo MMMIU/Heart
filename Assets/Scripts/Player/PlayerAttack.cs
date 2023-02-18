@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
     // hurt enemy ontrigger2d
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("Hurt enemy");
             // check if has Blob component

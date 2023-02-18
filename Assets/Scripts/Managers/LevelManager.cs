@@ -7,9 +7,6 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [Header("Game Manager: No need to reference here")] 
-    [SerializeField]
-    private GameManager gameManager;
 
     [Header("Level Settings")]
     [SerializeField]
@@ -31,12 +28,6 @@ public class LevelManager : MonoBehaviour
 
     private bool LevelCompletenessCheck()
     {
-        // check game manager
-        if (gameManager == null)
-        {
-            Debug.LogError("Game manager is null");
-            return false;
-        }
 
         // check level
         if (levelNumber < 0)
@@ -57,7 +48,6 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         if (!LevelCompletenessCheck())
         {
@@ -71,26 +61,12 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        gameManager.OnLoadingNextLevel.AddListener(OnLoadingNextLevel);
-    }
-
-    private void OnDisable()
-    {
-        gameManager.OnLoadingNextLevel.RemoveListener(OnLoadingNextLevel);
-    }
-
     private void OnLoadingNextLevel()
     {
-        if (gameManager.GetCurrLevel() == levelNumber)
-        {
-            Debug.Log("Level " + levelNumber + " is enabled.");
             if (hasBoss && bossPrefab != null)
             {
                 InitBoss();
             }
-        }
     }
 
     // Start is called before the first frame update
