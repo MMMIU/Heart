@@ -197,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
         if (HP <= 0)
         {
             HP = 0;
-            OnDeath();
+            StartCoroutine(OnDeath());
             return;
         }
         // if hp <= lowHP2, invoke lowHP2 event
