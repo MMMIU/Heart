@@ -9873,6 +9873,7 @@ MonoBehaviour:
   OnPlayerLowHP2:
     m_PersistentCalls:
       m_Calls: []
+  deathDelay: 3
   OnPlayerDie:
     m_PersistentCalls:
       m_Calls: []

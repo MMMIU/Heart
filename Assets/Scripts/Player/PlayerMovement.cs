@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     public UnityEvent OnPlayerLowHP1;
     public int lowHP2 = 6;
     public UnityEvent OnPlayerLowHP2;
+    public float deathDelay = 1f;
 
     // player die event
     public UnityEvent OnPlayerDie;
@@ -243,7 +244,8 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator OnDeath()
     {
         anim.SetTrigger("Death");
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(deathDelay);
         OnPlayerDie.Invoke();
+
     }
 }
