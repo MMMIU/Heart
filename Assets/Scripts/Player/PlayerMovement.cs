@@ -197,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
         if (HP <= 0)
         {
             HP = 0;
-            OnPlayerDie.Invoke();
+            OnDeath();
             return;
         }
         // if hp <= lowHP2, invoke lowHP2 event
@@ -238,5 +238,12 @@ public class PlayerMovement : MonoBehaviour
     public void ResetHP()
     {
         HP = 10;
+    }
+
+    IEnumerator OnDeath()
+    {
+        anim.SetTrigger("Death");
+        yield return new WaitForSeconds(0.8f);
+        OnPlayerDie.Invoke();
     }
 }
