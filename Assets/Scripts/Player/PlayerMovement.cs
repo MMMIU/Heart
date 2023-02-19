@@ -248,4 +248,9 @@ public class PlayerMovement : MonoBehaviour
         OnPlayerDie.Invoke();
 
     }
+
+    public void StartPraying()
+    {
+        anim.SetTrigger("PerformPrayer");
+    }
 }
