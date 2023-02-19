@@ -234,4 +234,9 @@ public class PlayerMovement : MonoBehaviour
     {
         attackHitBox.SetActive(false);
     }
+
+    public void ResetHP()
+    {
+        HP = 10;
+    }
 }

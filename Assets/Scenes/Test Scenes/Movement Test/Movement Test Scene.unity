@@ -234,6 +234,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &161947388
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8586050986973678850, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_Name
+      value: Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586050987279352383, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6005540c13d0e564aa1d8229172c1048, type: 3}
 --- !u!1 &735143663
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1172217883
 Transform:
   m_ObjectHideFlags: 0
@@ -582,7 +651,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.68, y: 0.92}
+    oldSize: {x: 2.125, y: 2.875}
     newSize: {x: 0.68, y: 0.92}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -603,17 +672,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a9a98fc42010347a06e9145472db6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDirection: 0
+  buffed: 0
   moveSpeed: 7
-  jumpForce: 15
-  jumpFloat: 0.5
-  checkRadius: 0.5
-  faceDirection: 1
-  rigidBody2D: {fileID: 1172217885}
-  groundCheck: {fileID: 1621496180}
+  collisionOffset: 0.1
+  isGrounded: 0
+  GroundCheck: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpForce: 15
+  isJumping: 0
+  maxJumpCount: 2
+  attackHitBox: {fileID: 0}
+  isHurtable: 1
+  HP: 10
+  lowHP1: 1
+  OnPlayerLowHP1:
+    m_PersistentCalls:
+      m_Calls: []
+  lowHP2: 6
+  OnPlayerLowHP2:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerDie:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1621496179
 GameObject:
   m_ObjectHideFlags: 0

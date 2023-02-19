@@ -30,6 +30,7 @@ public class HopeRespawnPoint : MonoBehaviour
     private void RespawnPlayer()
     {
         playerMovement.transform.position = transform.position;
+        playerMovement.ResetHP();
         // disable gameobject
         gameObject.SetActive(false);
         boss.TakeDamage(10086);
